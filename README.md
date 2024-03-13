@@ -1,2 +1,3 @@
-# algorithms-clrs
-Algorithms and Data Structures from CLRS
+# Algorithms CLRS
+
+Algorithms and Data Structures from CLRS written in C.
