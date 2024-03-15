@@ -29,7 +29,7 @@ int main()
     int* arr = generateRandomArray(size, 0, 100);
     printArray(arr, size);
 
-    insertionSort(arr, size);
+    bubbleSort(arr, size);
     printArray(arr, size);
 
     free(arr);
