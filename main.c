@@ -17,7 +17,7 @@ int* generateRandomArray(int size, int min, int max)
 
 void printArray(int arr[], size_t size)
 {
-    for (int i = 0; i < size; i++) {
+    for (size_t i = 0; i < size; i++) {
         printf("%d ", arr[i]);
     }
     printf("\n");
@@ -29,7 +29,7 @@ int main()
     int* arr = generateRandomArray(size, 0, 100);
     printArray(arr, size);
 
-    bubbleSort(arr, size);
+    mergeSort(arr, 0, size - 1);
     printArray(arr, size);
 
     free(arr);
