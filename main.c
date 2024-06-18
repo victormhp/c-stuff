@@ -29,7 +29,7 @@ int main()
     int* arr = generateRandomArray(size, 0, 100);
     printArray(arr, size);
 
-    mergeSort(arr, 0, size - 1);
+    selectionSort(arr, size);
     printArray(arr, size);
 
     free(arr);

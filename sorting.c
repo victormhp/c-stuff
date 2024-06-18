@@ -34,35 +34,48 @@ void bubbleSort(int arr[], int size)
     }
 }
 
-void mergeSort(int arr[], int p, int r)
+void selectionSort(int arr[], int size)
 {
-    if (p >= r) {
+    for (int i = 0; i < size; i++) {
+        int min_index = i;
+        for (int j = i + 1; j < size; j++) {
+            if (arr[min_index] > arr[j]) {
+                int temp = arr[min_index];
+                arr[min_index] = arr[j];
+                arr[j] = temp;
+            }
+        }
+    }
+}
+
+void mergeSort(int arr[], int l, int r)
+{
+    if (l >= r) {
         return;
     }
 
-    int q = p + (r - p) / 2;
-    mergeSort(arr, p, q);
-    mergeSort(arr, q + 1, r);
-    merge(arr, p, q, r);
+    int m = l + (r - l) / 2;
+    mergeSort(arr, l, m);
+    mergeSort(arr, m + 1, r);
+    merge(arr, l, m, r);
 }
 
-void merge(int *arr, int p, int q, int r)
+void merge(int* arr, int l, int m, int r)
 {
-    // Merge
-    int nl = q - p + 1;
-    int nr = r - q;
+    int nl = m - l + 1;
+    int nr = r - m;
     int L[nl], R[nr];
 
     for (int i = 0; i < nl; i++) {
-        L[i] = arr[p + i];
+        L[i] = arr[l + i];
     }
     for (int j = 0; j < nr; j++) {
-        R[j] = arr[q + j + 1];
+        R[j] = arr[m + 1 + j];
     }
 
     int i = 0;
     int j = 0;
-    int k = p;
+    int k = l;
 
     while (i < nl && j < nr) {
         if (L[i] <= R[j]) {
