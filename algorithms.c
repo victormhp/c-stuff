@@ -1,4 +1,4 @@
-#include "sorting.h"
+#include "algorithms.h"
 
 void insertionSort(int arr[], int size)
 {
@@ -12,6 +12,23 @@ void insertionSort(int arr[], int size)
         }
         arr[j + 1] = key;
     }
+}
+
+void insertionSortRecursive(int arr[], int size)
+{
+    if (size <= 1)
+        return;
+
+    insertionSortRecursive(arr, size - 1);
+
+    int key = arr[size - 1];
+    int j = size - 2;
+    while (j >= 0 && key < arr[j]) {
+        arr[j + 1] = arr[j];
+        j--;
+    }
+
+    arr[j + 1] = key;
 }
 
 void bubbleSort(int arr[], int size)
@@ -100,3 +117,47 @@ void merge(int* arr, int l, int m, int r)
         k++;
     }
 }
+
+int linearSearch(int arr[], int size, int value)
+{
+    for (int i = 0; i < size; i++) {
+        if (arr[i] == value) {
+            return i;
+        }
+    }
+    return -1;
+}
+
+int binarySearch(int arr[], int low, int high, int value)
+{
+    while (low <= high) {
+        int mid = low + (high - low) / 2;
+        if (arr[mid] == value) {
+            return mid;
+        } else if (arr[mid] > value) {
+            high = mid - 1;
+        } else if (arr[mid] < value) {
+            low = mid + 1;
+        }
+    }
+
+    return -1;
+}
+
+int binarySearchRecursive(int arr[], int low, int high, int value)
+{
+    if (low <= high) {
+        int mid = low + (high - low) / 2;
+        if (arr[mid] == value) {
+            return mid;
+        } else if (arr[mid] > value) {
+            return binarySearchRecursive(arr, low, mid - 1, value);
+        } else {
+            return binarySearchRecursive(arr, mid + 1, high, value);
+        }
+    }
+
+    return -1;
+}
+
+

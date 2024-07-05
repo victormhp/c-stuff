@@ -2,7 +2,7 @@ CC=gcc
 INCDIRS=-I.
 CFLAGS=-Wall -Wextra -g $(INCDIRS)
 
-SRCS=main.c sorting.c
+SRCS=main.c algorithms.c
 OBJS=$(SRCS:.c=.o)
 
 BINARY=main

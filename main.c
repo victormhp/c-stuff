@@ -1,4 +1,4 @@
-#include "sorting.h"
+#include "algorithms.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
@@ -25,12 +25,10 @@ void printArray(int arr[], size_t size)
 
 int main()
 {
-    int size = 10;
-    int* arr = generateRandomArray(size, 0, 100);
-    printArray(arr, size);
-
-    selectionSort(arr, size);
-    printArray(arr, size);
-
-    free(arr);
+    int arr[] = {1, 2, 3, 4, 5, 6};
+    int size = sizeof(arr) / sizeof(arr[1]);
+    int i = binarySearch(arr, 0, size, 2);
+    int j = binarySearchRecursive(arr, 0, size, 2);
+    printf("Value: %d\n", i);
+    printf("Value Recursive: %d\n", j);
 }
