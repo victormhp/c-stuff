@@ -1,46 +1,62 @@
 #include "algorithms.h"
 
-void insertionSort(int arr[], int size)
+void insertionSort(int nums[], int size)
 {
     for (int i = 1; i < size; i++) {
-        int key = arr[i];
+        int key = nums[i];
         int j = i - 1;
 
-        while (key < arr[j] && j >= 0) {
-            arr[j + 1] = arr[j];
+        while (key < nums[j] && j >= 0) {
+            nums[j + 1] = nums[j];
             j--;
         }
-        arr[j + 1] = key;
+        nums[j + 1] = key;
     }
 }
 
-void insertionSortRecursive(int arr[], int size)
+void insertionSortRecursive(int nums[], int size)
 {
-    if (size <= 1)
+    if (size <= 1) {
         return;
+    }
 
-    insertionSortRecursive(arr, size - 1);
+    insertionSortRecursive(nums, size - 1);
 
-    int key = arr[size - 1];
+    int key = nums[size - 1];
     int j = size - 2;
-    while (j >= 0 && key < arr[j]) {
-        arr[j + 1] = arr[j];
+    while (j >= 0 && key < nums[j]) {
+        nums[j + 1] = nums[j];
         j--;
     }
 
-    arr[j + 1] = key;
+    nums[j + 1] = key;
 }
 
-void bubbleSort(int arr[], int size)
+void shellSort(int nums[], int size)
+{
+    for (int gap = size / 2; gap > 0; gap /= 2) {
+        for (int i = gap; i < size; i++) {
+            int key = nums[i];
+            int j;
+            for (j = i; j >= gap && nums[j - gap] > key; j -= gap) {
+                nums[j] = nums[j - gap];
+            }
+
+            nums[j] = key;
+        }
+    }
+}
+
+void bubbleSort(int nums[], int size)
 {
     bool swapped;
     for (int i = 0; i < size - 1; i++) {
         swapped = false;
         for (int j = 0; j < size - i - 1; j++) {
-            if (arr[j] > arr[j + 1]) {
-                int temp = arr[j];
-                arr[j] = arr[j + 1];
-                arr[j + 1] = temp;
+            if (nums[j] > nums[j + 1]) {
+                int temp = nums[j];
+                nums[j] = nums[j + 1];
+                nums[j + 1] = temp;
                 swapped = true;
             }
         }
@@ -51,43 +67,43 @@ void bubbleSort(int arr[], int size)
     }
 }
 
-void selectionSort(int arr[], int size)
+void selectionSort(int nums[], int size)
 {
     for (int i = 0; i < size; i++) {
         int min_index = i;
         for (int j = i + 1; j < size; j++) {
-            if (arr[min_index] > arr[j]) {
-                int temp = arr[min_index];
-                arr[min_index] = arr[j];
-                arr[j] = temp;
+            if (nums[min_index] > nums[j]) {
+                int temp = nums[min_index];
+                nums[min_index] = nums[j];
+                nums[j] = temp;
             }
         }
     }
 }
 
-void mergeSort(int arr[], int l, int r)
+void mergeSort(int nums[], int l, int r)
 {
     if (l >= r) {
         return;
     }
 
     int m = l + (r - l) / 2;
-    mergeSort(arr, l, m);
-    mergeSort(arr, m + 1, r);
-    merge(arr, l, m, r);
+    mergeSort(nums, l, m);
+    mergeSort(nums, m + 1, r);
+    merge(nums, l, m, r);
 }
 
-void merge(int* arr, int l, int m, int r)
+void merge(int* nums, int l, int m, int r)
 {
     int nl = m - l + 1;
     int nr = r - m;
     int L[nl], R[nr];
 
     for (int i = 0; i < nl; i++) {
-        L[i] = arr[l + i];
+        L[i] = nums[l + i];
     }
     for (int j = 0; j < nr; j++) {
-        R[j] = arr[m + 1 + j];
+        R[j] = nums[m + 1 + j];
     }
 
     int i = 0;
@@ -96,47 +112,47 @@ void merge(int* arr, int l, int m, int r)
 
     while (i < nl && j < nr) {
         if (L[i] <= R[j]) {
-            arr[k] = L[i];
+            nums[k] = L[i];
             i++;
         } else {
-            arr[k] = R[j];
+            nums[k] = R[j];
             j++;
         }
         k++;
     }
 
     while (i < nl) {
-        arr[k] = L[i];
+        nums[k] = L[i];
         i++;
         k++;
     }
 
     while (j < nr) {
-        arr[k] = R[j];
+        nums[k] = R[j];
         j++;
         k++;
     }
 }
 
-int linearSearch(int arr[], int size, int value)
+int linearSearch(int nums[], int size, int value)
 {
     for (int i = 0; i < size; i++) {
-        if (arr[i] == value) {
+        if (nums[i] == value) {
             return i;
         }
     }
     return -1;
 }
 
-int binarySearch(int arr[], int low, int high, int value)
+int binarySearch(int nums[], int low, int high, int value)
 {
     while (low <= high) {
         int mid = low + (high - low) / 2;
-        if (arr[mid] == value) {
+        if (nums[mid] == value) {
             return mid;
-        } else if (arr[mid] > value) {
+        } else if (nums[mid] > value) {
             high = mid - 1;
-        } else if (arr[mid] < value) {
+        } else if (nums[mid] < value) {
             low = mid + 1;
         }
     }
@@ -144,20 +160,68 @@ int binarySearch(int arr[], int low, int high, int value)
     return -1;
 }
 
-int binarySearchRecursive(int arr[], int low, int high, int value)
+int binarySearchRecursive(int nums[], int low, int high, int value)
 {
     if (low <= high) {
         int mid = low + (high - low) / 2;
-        if (arr[mid] == value) {
+        if (nums[mid] == value) {
             return mid;
-        } else if (arr[mid] > value) {
-            return binarySearchRecursive(arr, low, mid - 1, value);
+        } else if (nums[mid] > value) {
+            return binarySearchRecursive(nums, low, mid - 1, value);
         } else {
-            return binarySearchRecursive(arr, mid + 1, high, value);
+            return binarySearchRecursive(nums, mid + 1, high, value);
         }
     }
 
     return -1;
 }
 
+int* pairSum(int nums[], int size, int target)
+{
+    mergeSort(nums, 0, size - 1);
 
+    for (int i = 0; i < size; i++) {
+        int complement = target - nums[i];
+        int low = 0;
+        int high = size - 1;
+
+        while (low <= high) {
+            int mid = low + (high - low) / 2;
+            if (nums[mid] == complement) {
+                int* res = (int*)malloc(2 * sizeof(int));
+                res[0] = i;
+                res[1] = mid;
+                return res;
+            } else if (mid < complement) {
+                low = mid + 1;
+            } else {
+                high = mid - 1;
+            }
+        }
+    }
+
+    return NULL;
+}
+
+int* pairSumFast(int nums[], int size, int target)
+{
+    int* map = (int*)malloc((target + 1) * sizeof(int));
+    for (int i = 0; i <= target; i++) {
+        map[i] = -1;
+    }
+
+    for (int i = 0; i < size; i++) {
+        int complement = target - nums[i];
+        if (map[complement] != -1) {
+            int* res = (int*)malloc(2 * sizeof(int));
+            res[0] = map[complement];
+            res[1] = i;
+            free(map);
+            return res;
+        }
+        map[nums[i]] = i;
+    }
+
+    free(map);
+    return NULL;
+}

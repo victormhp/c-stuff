@@ -15,9 +15,9 @@ int* generateRandomArray(int size, int min, int max)
     return arr;
 }
 
-void printArray(int arr[], size_t size)
+void printArray(int arr[], int size)
 {
-    for (size_t i = 0; i < size; i++) {
+    for (int i = 0; i < size; i++) {
         printf("%d ", arr[i]);
     }
     printf("\n");
@@ -25,10 +25,10 @@ void printArray(int arr[], size_t size)
 
 int main()
 {
-    int arr[] = {1, 2, 3, 4, 5, 6};
-    int size = sizeof(arr) / sizeof(arr[1]);
-    int i = binarySearch(arr, 0, size, 2);
-    int j = binarySearchRecursive(arr, 0, size, 2);
-    printf("Value: %d\n", i);
-    printf("Value Recursive: %d\n", j);
+    int size = 10;
+    int* arr = generateRandomArray(size, 1, 100);
+    printArray(arr, size);
+    shellSort(arr, size);
+    printArray(arr, size);
+    free(arr);
 }
