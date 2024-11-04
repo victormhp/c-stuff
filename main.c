@@ -1,27 +1,7 @@
 #include "algorithms.h"
-#include <stdio.h>
+#include "utils.h"
 #include <stdlib.h>
-#include <time.h>
 
-int* generateRandomArray(int size, int min, int max)
-{
-    int* arr = (int*)malloc(size * sizeof(int));
-    srand(time(NULL));
-
-    for (int i = 0; i < size; i++) {
-        arr[i] = (rand() % (max - min + 1)) + min;
-    }
-
-    return arr;
-}
-
-void printArray(int arr[], int size)
-{
-    for (int i = 0; i < size; i++) {
-        printf("%d ", arr[i]);
-    }
-    printf("\n");
-}
 
 int main()
 {
