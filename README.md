@@ -1,3 +1,3 @@
-# Algorithms CLRS
+# C Stuff
 
-Algorithms and Data Structures from CLRS written in C.
+Algorithms, data structures and command line tools implemented in C.
