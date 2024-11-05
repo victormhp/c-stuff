@@ -2,7 +2,7 @@ CC=gcc
 INCDIRS=-I.
 CFLAGS=-Wall -Wextra -g $(INCDIRS)
 
-SRCS=main.c algorithms.c utils.c
+SRCS=main.c algorithms.c cmd.c utils.c
 OBJS=$(SRCS:.c=.o)
 
 BINARY=main
@@ -19,5 +19,3 @@ clean:
 	rm -rf $(BINARY) $(OBJS)
 
 .PHONY: all clean
-
-
