@@ -23,5 +23,6 @@ int binarySearchRecursive(int nums[], int low, int high, int value);
 // Problems
 int* pairSum(int nums[], int size, int target); // Worst case time - O(nlog(n))
 int* pairSumFast(int nums[], int size, int target); // Worst case time - O(n)
+void prefixSum(int nums[], int size);
 
 #endif

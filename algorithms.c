@@ -1,4 +1,5 @@
 #include "algorithms.h"
+#include "utils.h"
 
 void insertionSort(int nums[], int size)
 {
@@ -224,4 +225,11 @@ int* pairSumFast(int nums[], int size, int target)
 
     free(map);
     return NULL;
+}
+
+void prefixSum(int nums[], int size)
+{
+    for (int i = 1; i < size; i++) {
+        nums[i] = nums[i - 1] + nums[i];
+    }
 }
