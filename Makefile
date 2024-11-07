@@ -1,21 +1,26 @@
 CC=gcc
-INCDIRS=-I.
-CFLAGS=-Wall -Wextra -g $(INCDIRS)
+CFLAGS=-Wall -Wextra -g
 
-SRCS=main.c algorithms.c cmd.c utils.c
-OBJS=$(SRCS:.c=.o)
+SRCDIR=src
+OBJDIR=obj
 
-BINARY=main
+SRCS=$(wildcard $(SRCDIR)/*.c)
+OBJS=$(patsubst $(SRCDIR)/%.c, $(OBJDIR)/%.o, $(SRCS))
 
-all: $(BINARY)
+TARGET=stuff
 
-$(BINARY): $(OBJS)
+all: $(TARGET)
+
+$(TARGET): $(OBJS)
 	$(CC) -o $@ $^
 
-%.o: %.c
-	$(CC) $(CFLAGS) -c -o $@ $^
+$(OBJDIR)/%.o: $(SRCDIR)/%.c | $(OBJDIR)
+	$(CC) $(CFLAGS) -c -o $@ $<
+
+$(OBJDIR):
+	mkdir -p $@
 
 clean:
-	rm -rf $(BINARY) $(OBJS)
+	rm -rf $(TARGET) $(OBJDIR)
 
 .PHONY: all clean
