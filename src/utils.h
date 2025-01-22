@@ -5,10 +5,10 @@
 #include <stdlib.h>
 #include <time.h>
 
+int *generateRandomArray(int size, int min, int max);
+int sumArray(int arr[], int size);
+int productArray(int arr[], int size);
 void printRandomNumbers(int min, int max, int count);
-
-int* generateRandomArray(int size, int min, int max);
-
 void printArray(int arr[], int size);
 
 #endif

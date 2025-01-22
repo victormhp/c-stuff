@@ -3,6 +3,6 @@
 
 #include <stdio.h>
 
-void str_to_numerical(const unsigned char* str);
+void str_to_numerical(const unsigned char *str);
 
 #endif

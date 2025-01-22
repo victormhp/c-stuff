@@ -1,10 +1,10 @@
 #ifndef ALGORITHMS
 #define ALGORITHMS
 
-#include <stdbool.h>
-#include <stdlib.h>
-#include <stddef.h>
 #include <math.h>
+#include <stdbool.h>
+#include <stddef.h>
+#include <stdlib.h>
 
 // Sorting
 void insertionSort(int nums[], int size);
@@ -21,8 +21,8 @@ int binarySearch(int nums[], int low, int high, int value);
 int binarySearchRecursive(int nums[], int low, int high, int value);
 
 // Problems
-int* pairSum(int nums[], int size, int target); // Worst case time - O(nlog(n))
-int* pairSumFast(int nums[], int size, int target); // Worst case time - O(n)
+int *pairSum(int nums[], int size, int target);		// Worst case time - O(nlog(n))
+int *pairSumFast(int nums[], int size, int target); // Worst case time - O(n)
 void prefixSum(int nums[], int size);
 
 #endif

@@ -3,8 +3,9 @@
 #include "utils.h"
 #include <stdlib.h>
 
-int main()
-{
-    printRandomNumbers(5, 50, 5);
-    return 0;
+int main() {
+	int arr[] = {1, 2, 3, 4, 5};
+	int size = sizeof(arr) / sizeof(arr[0]);
+	printf("Sum: %d\n", sumArray(arr, size));
+	return 0;
 }
