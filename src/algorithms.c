@@ -88,7 +88,7 @@ void mergeSort(int nums[], int l, int r) {
 	merge(nums, l, m, r);
 }
 
-void merge(int *nums, int l, int m, int r) {
+void merge(int nums[], int l, int m, int r) {
 	int nl = m - l + 1;
 	int nr = r - m;
 	int L[nl], R[nr];
