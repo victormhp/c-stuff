@@ -46,3 +46,7 @@ void printArray(int arr[], int size) {
 	}
 	printf("\n");
 }
+
+int min(int a, int b) {
+	return (a > b) ? b : a;
+}
