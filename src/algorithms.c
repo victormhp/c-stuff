@@ -21,7 +21,7 @@ void insertionSortRecursive(int nums[], int size) {
 
 	insertionSortRecursive(nums, size - 1);
 
-	int key = nums[size - 1];
+int key = nums[size - 1];
 	int j = size - 2;
 	while (j >= 0 && key < nums[j]) {
 		nums[j + 1] = nums[j];
@@ -78,9 +78,7 @@ void selectionSort(int nums[], int size) {
 }
 
 void mergeSort(int nums[], int l, int r) {
-	if (l >= r) {
-		return;
-	}
+	if (l >= r) return;
 
 	int m = l + (r - l) / 2;
 	mergeSort(nums, l, m);
@@ -89,22 +87,20 @@ void mergeSort(int nums[], int l, int r) {
 }
 
 void merge(int nums[], int l, int m, int r) {
-	int nl = m - l + 1;
-	int nr = r - m;
-	int L[nl], R[nr];
+	int n1 = m - l + 1;
+	int n2 = r - m;
+	int L[n1], R[n2];
 
-	for (int i = 0; i < nl; i++) {
+	for (int i = 0; i < n1; i++) {
 		L[i] = nums[l + i];
 	}
-	for (int j = 0; j < nr; j++) {
-		R[j] = nums[m + 1 + j];
+	for (int i = 0; i < n2; i++) {
+		R[i] = nums[m + 1 + i];
 	}
 
-	int i = 0;
-	int j = 0;
-	int k = l;
+	int i = 0, j = 0, k = l;
 
-	while (i < nl && j < nr) {
+	while (i < n1 && j < n2) {
 		if (L[i] <= R[j]) {
 			nums[k] = L[i];
 			i++;
@@ -115,16 +111,26 @@ void merge(int nums[], int l, int m, int r) {
 		k++;
 	}
 
-	while (i < nl) {
+	while (i < n1) {
 		nums[k] = L[i];
 		i++;
 		k++;
 	}
 
-	while (j < nr) {
+	while (j < n2) {
 		nums[k] = R[j];
 		j++;
 		k++;
+	}
+}
+
+void mergeSortIterative(int nums[], int size) {
+	for (int curr_size = 1; curr_size < size; curr_size *= 2) {
+		for (int l = 0; l < size; l += curr_size*2) {
+			int mid = l + curr_size - 1;
+			int r = min(l + 2*curr_size - 1, size - 1);
+			merge(nums, l, mid, r);
+		}
 	}
 }
 
@@ -165,58 +171,4 @@ int binarySearchRecursive(int nums[], int low, int high, int value) {
 	}
 
 	return -1;
-}
-
-int *pairSum(int nums[], int size, int target) {
-	mergeSort(nums, 0, size - 1);
-
-	for (int i = 0; i < size; i++) {
-		int complement = target - nums[i];
-		int low = 0;
-		int high = size - 1;
-
-		while (low <= high) {
-			int mid = low + (high - low) / 2;
-			if (nums[mid] == complement) {
-				int *res = (int *)malloc(2 * sizeof(int));
-				res[0] = i;
-				res[1] = mid;
-				return res;
-			} else if (mid < complement) {
-				low = mid + 1;
-			} else {
-				high = mid - 1;
-			}
-		}
-	}
-
-	return NULL;
-}
-
-int *pairSumFast(int nums[], int size, int target) {
-	int *map = (int *)malloc((target + 1) * sizeof(int));
-	for (int i = 0; i <= target; i++) {
-		map[i] = -1;
-	}
-
-	for (int i = 0; i < size; i++) {
-		int complement = target - nums[i];
-		if (map[complement] != -1) {
-			int *res = (int *)malloc(2 * sizeof(int));
-			res[0] = map[complement];
-			res[1] = i;
-			free(map);
-			return res;
-		}
-		map[nums[i]] = i;
-	}
-
-	free(map);
-	return NULL;
-}
-
-void prefixSum(int nums[], int size) {
-	for (int i = 1; i < size; i++) {
-		nums[i] = nums[i - 1] + nums[i];
-	}
 }

@@ -1,11 +1,14 @@
 #include "algorithms.h"
 #include "cmd.h"
+#include "problems.h"
 #include "utils.h"
-#include <stdlib.h>
+#include <stdio.h>
 
 int main() {
-	int arr[] = {1, 2, 3, 4, 5};
-	int size = sizeof(arr) / sizeof(arr[0]);
-	printf("Sum: %d\n", sumArray(arr, size));
-	return 0;
+    int a[] = {32, 12, 14, 45, 2};
+    int size = sizeof(a) / sizeof(a[0]);
+    mergeSortIterative(a, size);
+    printArray(a, size);
+
+    return 0;
 }
