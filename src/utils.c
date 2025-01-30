@@ -1,5 +1,11 @@
 #include "utils.h"
 
+void swap(int *a, int *b) {
+	int temp = *a;
+	*a = *b;
+	*b = temp;
+}
+
 int *generateRandomArray(int size, int min, int max) {
 	int *arr = (int *)malloc(size * sizeof(int));
 	srand(time(NULL));
@@ -47,6 +53,25 @@ void printArray(int arr[], int size) {
 	printf("\n");
 }
 
-int min(int a, int b) {
-	return (a > b) ? b : a;
+int min(int a, int b) { return (a > b) ? b : a; }
+
+int findMinElement(int a[], int size) {
+	int min = 0;
+	for (int i = 0; i < size; i++) {
+		if (a[i] < a[min]) {
+			min = i;
+		}
+	}
+	return min;
+}
+
+int findMaxElement(int a[], int size) {
+	int max = 0;
+	for (int i = 0; i < size; i++) {
+		if (a[i] > a[max]) {
+			max = i;
+		}
+	}
+	return max;
+
 }
