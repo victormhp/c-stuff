@@ -8,7 +8,10 @@
 void testMinHeap();
 
 int main() {
-	testMinHeap();
+	int arr[] = {10, 8, 9, 3, 2, 4, 7};
+	int size = sizeof(arr) / sizeof(arr[0]);
+	heapSort(arr, size);
+	printArray(arr, size);
 	return 0;
 }
 
@@ -35,7 +38,7 @@ void testMinHeap() {
 
 	// Build from array
 	int arr[] = {22, 11, 33, 44, 55, 12, 25};
-	int size = sizeof(arr)/ sizeof(arr[0]);
+	int size = sizeof(arr) / sizeof(arr[0]);
 	buildHeap(heap, arr, size);
 	printArray(heap->arr, heap->size);
 

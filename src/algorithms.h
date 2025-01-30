@@ -14,8 +14,10 @@ void shellSort(int nums[], int size);
 void bubbleSort(int nums[], int size);
 void selectionSort(int nums[], int size);
 void mergeSort(int nums[], int l, int r);
-void merge(int nums[], int l, int m, int r);
 void mergeSortIterative(int nums[], int size);
+void merge(int nums[], int l, int m, int r);
+void heapify(int nums[], int size, int i);
+void heapSort(int nums[], int size);
 
 // Searching
 int linearSearch(int nums[], int size, int value);

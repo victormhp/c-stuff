@@ -21,7 +21,7 @@ void insertionSortRecursive(int nums[], int size) {
 
 	insertionSortRecursive(nums, size - 1);
 
-int key = nums[size - 1];
+	int key = nums[size - 1];
 	int j = size - 2;
 	while (j >= 0 && key < nums[j]) {
 		nums[j + 1] = nums[j];
@@ -78,12 +78,23 @@ void selectionSort(int nums[], int size) {
 }
 
 void mergeSort(int nums[], int l, int r) {
-	if (l >= r) return;
+	if (l >= r)
+		return;
 
 	int m = l + (r - l) / 2;
 	mergeSort(nums, l, m);
 	mergeSort(nums, m + 1, r);
 	merge(nums, l, m, r);
+}
+
+void mergeSortIterative(int nums[], int size) {
+	for (int curr_size = 1; curr_size < size; curr_size *= 2) {
+		for (int l = 0; l < size; l += curr_size * 2) {
+			int mid = l + curr_size - 1;
+			int r = min(l + 2 * curr_size - 1, size - 1);
+			merge(nums, l, mid, r);
+		}
+	}
 }
 
 void merge(int nums[], int l, int m, int r) {
@@ -124,13 +135,43 @@ void merge(int nums[], int l, int m, int r) {
 	}
 }
 
-void mergeSortIterative(int nums[], int size) {
-	for (int curr_size = 1; curr_size < size; curr_size *= 2) {
-		for (int l = 0; l < size; l += curr_size*2) {
-			int mid = l + curr_size - 1;
-			int r = min(l + 2*curr_size - 1, size - 1);
-			merge(nums, l, mid, r);
-		}
+void heapify(int nums[], int n, int i) {
+	int largest = i;
+	int l = 2 * i + 1;
+	int r = 2 * i + 2;
+	printf("largest: %d l: %d r: %d\n", nums[largest], nums[l], nums[r]);
+
+	if (l < n && nums[l] > nums[largest]) {
+		largest = l;
+	}
+
+	if (r < n && nums[r] > nums[largest]) {
+		largest = r;
+	}
+
+	if (largest != i) {
+		printf("Heapify Swap: %d - %d\n\n", nums[largest], nums[i]);
+		int temp = nums[largest];
+		nums[largest] = nums[i];
+		nums[i] = temp;
+		heapify(nums, n, largest);
+	}
+}
+
+void heapSort(int nums[], int size) {
+	for (int i = (size / 2) - 1; i >= 0; i--) {
+		heapify(nums, size, i);
+	}
+
+	printArray(nums, size);
+
+	for (int i = size - 1; i > 0; i--) {
+		printf("Iteration: %d Swap: %d - %d\n", i, nums[0], nums[i]);
+		int temp = nums[0];
+		nums[0] = nums[i];
+		nums[i] = temp;
+
+		heapify(nums, i, 0);
 	}
 }
 
