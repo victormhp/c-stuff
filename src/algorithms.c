@@ -139,7 +139,6 @@ void heapify(int nums[], int n, int i) {
 	int largest = i;
 	int l = 2 * i + 1;
 	int r = 2 * i + 2;
-	printf("largest: %d l: %d r: %d\n", nums[largest], nums[l], nums[r]);
 
 	if (l < n && nums[l] > nums[largest]) {
 		largest = l;
@@ -150,7 +149,6 @@ void heapify(int nums[], int n, int i) {
 	}
 
 	if (largest != i) {
-		printf("Heapify Swap: %d - %d\n\n", nums[largest], nums[i]);
 		int temp = nums[largest];
 		nums[largest] = nums[i];
 		nums[i] = temp;
@@ -166,7 +164,6 @@ void heapSort(int nums[], int size) {
 	printArray(nums, size);
 
 	for (int i = size - 1; i > 0; i--) {
-		printf("Iteration: %d Swap: %d - %d\n", i, nums[0], nums[i]);
 		int temp = nums[0];
 		nums[0] = nums[i];
 		nums[i] = temp;
