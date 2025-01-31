@@ -18,6 +18,7 @@ void mergeSortIterative(int nums[], int size);
 void merge(int nums[], int l, int m, int r);
 void heapify(int nums[], int size, int i);
 void heapSort(int nums[], int size);
+void quickSort(int nums[], int size);
 
 // Searching
 int linearSearch(int nums[], int size, int value);

@@ -73,5 +73,4 @@ int findMaxElement(int a[], int size) {
 		}
 	}
 	return max;
-
 }
