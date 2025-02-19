@@ -210,3 +210,57 @@ int binarySearchRecursive(int nums[], int low, int high, int value) {
 
 	return -1;
 }
+
+// DFS
+Stack *createNewStack(int capacity) {
+	Stack *stack = (Stack *)malloc(sizeof(Stack));
+	stack->data = (Node *)malloc(capacity * sizeof(Node));
+	stack->top = -1;
+	stack->capacity = capacity;
+	return stack;
+}
+
+void pushToStack(Stack *stack, int x, int y) { stack->data[++stack->top] = (Node){x, y}; }
+
+Node popStack(Stack *stack) { return stack->data[stack->top--]; }
+
+bool isStackEmpty(Stack *stack) { return stack->top == -1; }
+
+void freeStack(Stack *stack) {
+	free(stack->data);
+	free(stack);
+}
+
+void depthFirstSearch(int grid[ROWS][COLS], int x, int y) {
+	int directions[4][2] = {
+		{1, 0},
+		{-1, 0},
+		{0, 1},
+		{0, -1},
+	};
+
+	int visited[ROWS][COLS] = {0};
+	Stack *stack = createNewStack(ROWS * COLS);
+
+	pushToStack(stack, x, y);
+	visited[y][x] = 1;
+
+	while (!isStackEmpty(stack)) {
+		Node node = popStack(stack);
+		int x = node.x;
+		int y = node.y;
+		printf("Visited: (%d, %d) -> %d\n", y, x, grid[y][x]);
+
+		for (int i = 0; i < 4; i++) {
+			int nx = x + directions[i][0];
+			int ny = y + directions[i][1];
+
+			if (nx >= 0 && nx < COLS && ny >= 0 && ny < ROWS && !visited[ny][nx]) {
+				pushToStack(stack, nx, ny);
+				visited[ny][nx] = 1;
+			}
+		}
+	}
+
+	freeStack(stack);
+}

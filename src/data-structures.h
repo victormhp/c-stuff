@@ -22,6 +22,7 @@ int extractMinHeap(MinHeap *heap);
 int peekHeap(MinHeap *heap);
 void deleteAtIndexHeap(MinHeap *heap, int i);
 void buildHeap(MinHeap *heap, int *arr, int size);
+void testMinHeap();
 
 // Queue
 typedef struct {

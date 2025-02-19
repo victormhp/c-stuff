@@ -1,11 +1,14 @@
 #ifndef ALGORITHMS
 #define ALGORITHMS
 
+#include "utils.h"
 #include <math.h>
 #include <stdbool.h>
 #include <stddef.h>
 #include <stdlib.h>
-#include "utils.h"
+
+#define ROWS 4
+#define COLS 4
 
 // Sorting
 void insertionSort(int nums[], int size);
@@ -24,5 +27,23 @@ void quickSort(int nums[], int size);
 int linearSearch(int nums[], int size, int value);
 int binarySearch(int nums[], int low, int high, int value);
 int binarySearchRecursive(int nums[], int low, int high, int value);
+
+// DFS
+typedef struct {
+	int x, y;
+} Node;
+
+typedef struct {
+	Node *data;
+	int top, capacity;
+} Stack;
+
+Stack *createNewStack(int capacity);
+void pushToStack(Stack *stack, int x, int y);
+Node popStack(Stack *stack);
+bool isStackEmpty(Stack *stack);
+void freeStack(Stack *stack);
+
+void depthFirstSearch(int grid[ROWS][COLS], int x, int y);
 
 #endif
