@@ -95,3 +95,31 @@ void buildHeap(MinHeap *heap, int *arr, int size) {
 		heapifyDown(heap, i);
 	}
 }
+
+// Queue
+void initQueue(Queue *q) { q->front = q->rear = -1; }
+
+bool isQueueEmpty(Queue *q) { return q->front == -1; }
+
+bool isQueueFull(Queue *q) { return q->rear == MAX_SIZE - 1; }
+
+void enqueue(Queue *q, int value) {
+	if (isQueueFull(q)) {
+		return;
+	}
+	if (isQueueEmpty(q)) {
+		q->front = 0;
+	}
+	q->arr[++q->rear] = value;
+}
+
+int dequeue(Queue *q) {
+	if (isQueueEmpty(q)) {
+		return -1;
+	}
+	int item = q->arr[q->front++];
+	if (q->front > q->rear) {
+		initQueue(q);
+	}
+	return item;
+}
