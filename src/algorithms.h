@@ -45,5 +45,6 @@ bool isStackEmpty(Stack *stack);
 void freeStack(Stack *stack);
 
 void depthFirstSearch(int grid[ROWS][COLS], int x, int y);
+void testDfs();
 
 #endif
