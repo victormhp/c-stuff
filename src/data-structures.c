@@ -127,6 +127,37 @@ void testMinHeap() {
 	free(heap);
 }
 
+// Stack
+void initStack(Stack *s) { s->top = -1; }
+
+bool isStackEmpty(Stack *s) { return s->top == -1; }
+
+bool isStackFull(Stack *s) { return s->top == MAX_SIZE - 1; }
+
+void pushStack(Stack *s, int value) {
+	if (isStackFull(s)) {
+		return;
+	}
+	s->arr[++s->top] = value;
+}
+
+int popStack(Stack *s) {
+	if (isStackEmpty(s)) {
+		return -1;
+	}
+	int value = s->arr[s->top];
+	s->top--;
+	return value;
+}
+
+int peekStack(Stack *s) {
+	if (isStackEmpty(s)) {
+		return -1;
+	}
+	int value = s->arr[s->top];
+	return value;
+}
+
 // Queue
 void initQueue(Queue *q) { q->front = q->rear = -1; }
 
@@ -152,5 +183,13 @@ int dequeue(Queue *q) {
 	if (q->front > q->rear) {
 		initQueue(q);
 	}
+	return item;
+}
+
+int peekQueue(Queue *q) {
+	if (isQueueEmpty(q)) {
+		return -1;
+	}
+	int item = q->arr[q->front];
 	return item;
 }
