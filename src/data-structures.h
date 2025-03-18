@@ -44,6 +44,7 @@ typedef struct {
 	int arr[MAX_SIZE];
 	int back, front;
 	int capacity;
+	int curr;
 } Queue;
 
 void initQueue(Queue *q);

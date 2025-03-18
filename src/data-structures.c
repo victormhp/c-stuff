@@ -161,34 +161,45 @@ int peekStack(Stack *s) {
 	return value;
 }
 
-// Static Queue
+// Static Circular Queue
 void initQueue(Queue *q) {
+	q->curr = 0;
 	q->front = q->back = -1;
 	q->capacity = MAX_SIZE;
 }
 
-bool isQueueEmpty(Queue *q) { return q->front == -1; }
+bool isQueueEmpty(Queue *q) { return q->curr == 0; }
 
-bool isQueueFull(Queue *q) { return q->back == q->capacity - 1; }
+bool isQueueFull(Queue *q) { return q->curr == q->capacity; }
 
 void enqueue(Queue *q, int value) {
 	if (isQueueFull(q)) {
 		return;
 	}
+
 	if (isQueueEmpty(q)) {
 		q->front = 0;
 	}
-	q->arr[++q->back] = value;
+
+	q->back = (q->back + 1) % q->capacity;
+	q->arr[q->back] = value;
+	q->curr++;
 }
 
 int dequeue(Queue *q) {
 	if (isQueueEmpty(q)) {
 		return -1;
 	}
-	int item = q->arr[q->front++];
-	if (q->front > q->back) {
-		initQueue(q);
+
+	int item = q->arr[q->front];
+
+	if (q->front == q->back) {
+		q->front = q->back = -1;
+	} else {
+		q->front = (q->front + 1) % q->capacity;
 	}
+
+	q->curr--;
 	return item;
 }
 
