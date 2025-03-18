@@ -127,12 +127,15 @@ void testMinHeap() {
 	free(heap);
 }
 
-// Stack
-void initStack(Stack *s) { s->top = -1; }
+// Static Stack
+void initStack(Stack *s) {
+	s->top = -1;
+	s->capacity = MAX_SIZE;
+}
 
 bool isStackEmpty(Stack *s) { return s->top == -1; }
 
-bool isStackFull(Stack *s) { return s->top == MAX_SIZE - 1; }
+bool isStackFull(Stack *s) { return s->top == s->capacity - 1; }
 
 void pushStack(Stack *s, int value) {
 	if (isStackFull(s)) {
@@ -158,12 +161,15 @@ int peekStack(Stack *s) {
 	return value;
 }
 
-// Queue
-void initQueue(Queue *q) { q->front = q->rear = -1; }
+// Static Queue
+void initQueue(Queue *q) {
+	q->front = q->back = -1;
+	q->capacity = MAX_SIZE;
+}
 
 bool isQueueEmpty(Queue *q) { return q->front == -1; }
 
-bool isQueueFull(Queue *q) { return q->rear == MAX_SIZE - 1; }
+bool isQueueFull(Queue *q) { return q->back == q->capacity - 1; }
 
 void enqueue(Queue *q, int value) {
 	if (isQueueFull(q)) {
@@ -172,7 +178,7 @@ void enqueue(Queue *q, int value) {
 	if (isQueueEmpty(q)) {
 		q->front = 0;
 	}
-	q->arr[++q->rear] = value;
+	q->arr[++q->back] = value;
 }
 
 int dequeue(Queue *q) {
@@ -180,7 +186,7 @@ int dequeue(Queue *q) {
 		return -1;
 	}
 	int item = q->arr[q->front++];
-	if (q->front > q->rear) {
+	if (q->front > q->back) {
 		initQueue(q);
 	}
 	return item;
@@ -192,4 +198,21 @@ int peekQueue(Queue *q) {
 	}
 	int item = q->arr[q->front];
 	return item;
+}
+
+void testQueue() {
+	Queue q;
+	initQueue(&q);
+
+	for (int i = 1; i <= 10; i++) {
+		enqueue(&q, i);
+	}
+
+	for (int i = 1; i <= 5; i++) {
+		dequeue(&q);
+	}
+
+	for (int i = q.front; i <= q.back; i++) {
+		printf("Queue %d element: %d\n", i, q.arr[i]);
+	}
 }

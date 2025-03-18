@@ -8,6 +8,6 @@
 void testMinHeap();
 
 int main() {
-	testDfs();
+	testQueue();
 	return 0;
 }

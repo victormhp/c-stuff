@@ -24,23 +24,26 @@ void deleteAtIndexHeap(MinHeap *heap, int i);
 void buildHeap(MinHeap *heap, int *arr, int size);
 void testMinHeap();
 
-// Stack
+// Static Stack
 typedef struct {
 	int arr[MAX_SIZE];
 	int top;
+	int capacity;
 } Stack;
 
 void initStack(Stack *s);
-bool isStackEmpty(Stack *s);
+bool isNodeStackEmpty(Stack *s);
 bool isStackFull(Stack *s);
 void pushStack(Stack *s, int value);
 int popStack(Stack *s);
 int peekStack(Stack *s);
+void testStack();
 
-// Queue
+// Static Queue
 typedef struct {
 	int arr[MAX_SIZE];
-	int rear, front;
+	int back, front;
+	int capacity;
 } Queue;
 
 void initQueue(Queue *q);
@@ -49,5 +52,6 @@ bool isQueueFull(Queue *q);
 void enqueue(Queue *q, int value);
 int dequeue(Queue *q);
 int peekQueue(Queue *q);
+void testQueue();
 
 #endif
